@@ -77,6 +77,8 @@ In this lab you'll use these  capabilities can be used to deploy a small legacy 
 
 3.4 Select the **Databases** category, click **MariaDB** and then **MariaDB (Ephemeral)**
 
+   ![Create MariaDB](images/ss5.png)
+
 3.5 Click **Next**
 
 3.6 Enter the following values for the fields indicated below (leave remaining values at their default values)
@@ -91,13 +93,11 @@ In this lab you'll use these  capabilities can be used to deploy a small legacy 
 
 3.8 Under **Create a binding for MariaDB (Ephemeral)** select **Create a secret in pbw-liberty-mariadb to be used later**
 
-   ![Create binding](images/ss5.png)
-
-3.9 Click **Create** and then click **Continue to the project overview** and then **Close**
+3.9 Click **Create** and then click **Continue to the project overview**
 
    ![Continue](images/ss6.png)
 
-3.10 Verify that the Pod for the MariaDB deployment is shown as running
+3.10 Verify that the Pod for the MariaDB deployment eventually shows as running
 
    ![Pod running](images/ss7.png)
 
