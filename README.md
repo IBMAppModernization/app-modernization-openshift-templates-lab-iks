@@ -57,7 +57,7 @@ In this lab you'll use these  capabilities can be used to deploy a small legacy 
 2.5 Login to the internal registry
 
    ```bash
-   docker login -u `oc whoami` -p `oc whoami -t` https://$INTERNAL_REG_HOST
+   docker login -u `oc whoami` -p `oc whoami -t` $INTERNAL_REG_HOST
    ```
 2.6 Push the S2I Liberty image to the internal registry
 
