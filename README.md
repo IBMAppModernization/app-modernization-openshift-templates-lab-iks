@@ -67,7 +67,7 @@ In this lab you'll use these  capabilities can be used to deploy a small legacy 
 
 ### Step 3: Install MariaDB from the OpenShift template catalog
 
-3.1 In your Web console browser tab under **My Projects** click on **View All**
+3.1 In your Web console browser tab, at the top select **Service Catalog**, then under **My Projects** click on **View All**
 
    ![View All](images/ss4.png)
 
@@ -113,12 +113,12 @@ In this lab you'll use these  capabilities can be used to deploy a small legacy 
 
    ```bash
    git clone https://github.com/djccarew/app-modernization-plants-by-websphere-jee6
-   cd openshift/templates
+   cd app-modernization-plants-by-websphere-jee6/openshift/templates
    ```
 4.3 Add the Plants by WebSphere Liberty app template to your OpenShift cluster
 
    ```bash
-   oc create -f pbw-liberty.yaml
+   oc create -f pbw-liberty-template.yaml
    ```
 4.4 In your Web console browser tab make sure you're in the **pbw-liberty-mariadb** project (top left) and click on **Add to Project -> Browse Catalog** (top right)
 
@@ -130,7 +130,7 @@ In this lab you'll use these  capabilities can be used to deploy a small legacy 
 
 4.7 Click  **Continue to the project overview**
 
-4.8 Wait until the Pod for the Plants by WebSphere app on Liberty shows as running and then click on the route to get to the app's endpoint
+4.8 Wait until the Pod for the Plants by WebSphere app on Liberty shows as running and then click on the route to get to the app's endpoint. Note that it takes a few additional seconds after the pod shows "running" for the WebSphere application to start up.
 
    ![Launch app](images/ss9.png)
 
