@@ -51,7 +51,7 @@ In this lab you'll use these  capabilities can be used to deploy a small legacy 
 2.4 Build the S2I Liberty image and tag it appropriately for the internal registry
 
    ```bash
-   docker build -t $INTERNAL_REG_HOST/pbw-liberty-mariadb/s2i-liberty-javaee7:1.0 .
+   docker build -t $INTERNAL_REG_HOST/`oc project -q`/s2i-liberty-javaee7:1.0 .
    ```
 
 2.5 Login to the internal registry
@@ -62,7 +62,7 @@ In this lab you'll use these  capabilities can be used to deploy a small legacy 
 2.6 Push the S2I Liberty image to the internal registry
 
    ```bash
-    docker push $INTERNAL_REG_HOST/pbw-liberty-mariadb/s2i-liberty-javaee7:1.0
+    docker push $INTERNAL_REG_HOST/`oc project -q`/s2i-liberty-javaee7:1.0
    ```
 
 ### Step 3: Install MariaDB from the OpenShift template catalog
@@ -89,60 +89,82 @@ In this lab you'll use these  capabilities can be used to deploy a small legacy 
 | MariaDB Connection Password | `l1bertyR0cks` |
 | MariaDB Database Name | `plantsdb`|
 
-3.7 Click **Next**
+When you're done the dialog should look like the following:
 
-3.8 Under **Create a binding for MariaDB (Ephemeral)** select **Create a secret in pbw-liberty-mariadb to be used later**
+ ![DB values](images/ss5.5.png)
 
-3.9 Click **Create** and then click **Continue to the project overview**
+3.7 Scroll down to the **Labels** section and change the **app** label value to `pbw-liberty-mariadb`
+
+ ![App label](images/ss5.6.png)
+
+3.8 Click **Next**
+
+3.9 Under **Create a binding for MariaDB (Ephemeral)** select **Create a secret in pbw-liberty-mariadb to be used later**
+
+3.10 Click **Create** and then click **Continue to the project overview**
 
    ![Continue](images/ss6.png)
 
-3.10 Verify that the Pod for the MariaDB deployment eventually shows as running
+3.11 Verify that the Pod for the MariaDB deployment eventually shows as running
 
    ![Pod running](images/ss7.png)
 
-### Step 4: Install the Plants by WebSphere Liberty app using a template that utilizes S2I to build the app image   
+### Step 4: Clone the Github repo that contains the code for the Plants by WebSphere app
 
-4.1 From your terminal go back to your home directory
+4.1  Login in [your Github account](https://github.com)
+
+4.2  In the search bar at the top left type in `app-modernization-plants-by-websphere-jee6`
+
+ ![Search results](images/ss0.png)
+
+4.3  Select the repository `IBMAppModernization\app-modernization-plants-by-websphere-jee6` and then click on the **Fork** icon
+
+4.4  Click the **Clone or download** button from your copy of the forked repo and copy the HTTPS URL to your clipboard
+
+ ![Clone URL](images/ss00.png)
+
+4.5 From your terminal go back to your home directory
+
+  ```text
+  cd ~
+  ```
+4.6  From the client terminal window clone the Git repo  with  the following commands  appending the HTTPS URL from your clipboard
+
+  ```text
+  git clone [HTTPS URL for NEW REPO]
+  cd app-modernization-plants-by-websphere-jee6
+  ```
+
+### Step 5: Install the Plants by WebSphere Liberty app using a template that utilizes S2I to build the app image   
+
+5.1 Add the Plants by WebSphere Liberty app template to your OpenShift cluster
 
    ```bash
-   cd ~
+   oc create -f openshift/templates/pbw-liberty-template.yaml
    ```
-
-4.2 Clone the Plants by WebSphere Liberty GitHub repo by issuing the following commands
-
-   ```bash
-   git clone https://github.com/djccarew/app-modernization-plants-by-websphere-jee6
-   cd openshift/templates
-   ```
-4.3 Add the Plants by WebSphere Liberty app template to your OpenShift cluster
-
-   ```bash
-   oc create -f pbw-liberty.yaml
-   ```
-4.4 In your Web console browser tab make sure you're in the **pbw-liberty-mariadb** project (top left) and click on **Add to Project -> Browse Catalog** (top right)
+5.2 In your Web console browser tab make sure you're in the **pbw-liberty-mariadb** project (top left) and click on **Add to Project -> Browse Catalog** (top right)
 
    ![View All](images/ss8.png)
 
-4.5 Select the **Other** category and then click **Plants by WebSphere on Liberty**
+5.3 Select the **Other** category and then click **Plants by WebSphere on Liberty**
 
-4.6 Accept all the default values and click **Create**
+5.4 Accept all the default values and click **Create**
 
-4.7 Click  **Continue to the project overview**
+5.5 Click  **Continue to the project overview**
 
-4.8 Wait until the Pod for the Plants by WebSphere app on Liberty shows as running and then click on the route to get to the app's endpoint
+5.6 Wait until the Pod for the Plants by WebSphere app on Liberty shows as running and then click on the route to get to the app's endpoint
 
    ![Launch app](images/ss9.png)
 
-### Step 5: Test the Plants by WebSphere app
+### Step 6: Test the Plants by WebSphere app
 
-5.1 From the Plants by WebSphere app UI, click on the **HELP** link
+6.1 From the Plants by WebSphere app UI, click on the **HELP** link
 
    ![Running app](images/ss10.png)
 
-5.2. Click on **Reset database** to populate the MariaDB database with data
+6.2 Click on **Reset database** to populate the MariaDB database with data
 
-5.3. Verify that browsing different sections of the online catalog shows product descriptions and images.
+6.3 Verify that browsing different sections of the online catalog shows product descriptions and images.
 
    ![Online catalog](images/ss11.png)
 
