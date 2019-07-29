@@ -117,7 +117,7 @@ When you're done the dialog should look like the following:
 
  ![Search results](images/ss0.png)
 
-4.3  Select the repository `IBMAppModernization\app-modernization-plants-by-websphere-jee6` and then click on the **Fork** icon
+4.3  Select the repository `IBMAppModernization/app-modernization-plants-by-websphere-jee6` and then click on the **Fork** icon
 
 4.4  Click the **Clone or download** button from your copy of the forked repo and copy the HTTPS URL to your clipboard
 
@@ -140,7 +140,7 @@ When you're done the dialog should look like the following:
 5.1 Add the Plants by WebSphere Liberty app template to your OpenShift cluster
 
    ```bash
-   oc create -f openshift/templates/pbw-liberty-template.yaml
+   oc create -f openshift/templates/s2i/pbw-liberty-template.yaml
    ```
 5.2 In your Web console browser tab make sure you're in the **pbw-liberty-mariadb** project (top left) and click on **Add to Project -> Browse Catalog** (top right)
 
