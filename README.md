@@ -120,7 +120,7 @@ When you're done the dialog should look like the following:
 
 4.1  Login in [your Github account](https://github.com)
 
-4.2  In the search bar at the top left type in `app-modernization-plants-by-websphere-jee6`
+4.2  In the search bar at the top left, type in `app-modernization-plants-by-websphere-jee6`
 
  ![Search results](images/ss0.png)
 
@@ -144,24 +144,43 @@ When you're done the dialog should look like the following:
 
 ### Step 5: Install the Plants by WebSphere Liberty app using a template that utilizes S2I to build the app image   
 
-5.1 Add the Plants by WebSphere Liberty app template to your OpenShift cluster
+5.1 Add the Plants by WebSphere Liberty app template to your OpenShift cluster in the terminal window.
 
    ```bash
    oc create -f openshift/templates/s2i/pbw-liberty-template.yaml
    ```
-5.2 In your Web console browser tab make sure you're in the **pbw-liberty-mariadb** project (top left) and click on **Add to Project -> Browse Catalog** (top right)
+5.2 In your OpenShift coonsole, make sure you're in the **pbw-liberty-mariadb** project.
 
-   ![View All](images/ss8.png)
+   ![View All](images/ss8-1.png)
 
-5.3 Select the **Other** category and then click **Plants by WebSphere on Liberty**
+5.3 Select `Topology` in the left pane to view your MariaDB instance.
 
-5.4 Accept all the default values and click **Create**
+5.4 Select **+Add** in the left pane.
 
-5.5 Click  **Continue to the project overview**
+5.5 Select `From Catalog` tile.
 
-5.6 Wait until the Pod for the Plants by WebSphere app on Liberty shows as running and then click on the route to get to the app's endpoint
+5.6 Select the **Other** category under `All Items` and then select **Plants by WebSphere on Liberty**.
 
-   ![Launch app](images/ss9.png)
+   ![View All](images/ss8-2.png)
+
+5.7 Select `Instantiate Template`.
+
+5.8 Accept all the default values and click **Create**
+
+5.9 Wait until the instance of the Plants by WebSphere app on Liberty shows as `Running` status.
+
+5.9 Select `Topology` in the left pane.
+
+5.10 Select `pbw-liberty-mariadb` icon in the right pane.
+
+   ![View All](images/ss8-3.png)
+
+5.11 It should be in `Running` status.
+
+5.12 Click the `Route` link to access the application.
+
+    >Note: The application may not be ready for you to access even deployment has been completed. It may take another couple of minutes when you are able to access it.
+
 
 ### Step 6: Test the Plants by WebSphere app
 
