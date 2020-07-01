@@ -26,7 +26,11 @@ In this lab you'll use these  capabilities can be used to deploy a small legacy 
 
    ![Copy Login Command](images/ss3.png)
 
-1.5 Paste the login command in a terminal window and run it (Note: leave the web console browser tab open as you'll need it later on in the lab)
+1.5 Click `Display Token` link.
+
+1.6 Copy the login command in the `Log in with this token` field.
+
+1.7 Paste the login command in a terminal window and run it (Note: leave the web console browser tab open as you'll need it later on in the lab)
 
 ### Step 2: Clone the WebSphere Liberty S2I image source, create a Docker image,  and push it to the OpenShift internal registry
 
