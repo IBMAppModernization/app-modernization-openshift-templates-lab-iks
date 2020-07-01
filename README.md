@@ -40,7 +40,8 @@ In this lab you'll use these  capabilities can be used to deploy a small legacy 
 2.2 Get the hostname of your OpenShift internal registry so you can push images to it
 
    ```bash
-   export INTERNAL_REG_HOST=`oc get route docker-registry --template='{{ .spec.host }}' -n default`
+   export INTERNAL_REG_HOST=$(oc get route default-route -n openshift-image-registry --template='{{ .spec.host }}')
+   echo $INTERNAL_REG_HOST
    ```
 2.3 Create a new OpenShift project for this lab
 
@@ -67,21 +68,25 @@ In this lab you'll use these  capabilities can be used to deploy a small legacy 
 
 ### Step 3: Install MariaDB from the OpenShift template catalog
 
-3.1 In your Web console browser tab under **My Projects** click on **View All**
+3.1 In your OpenShift Web console, switch to `Developer` view.
 
-   ![View All](images/ss4.png)
+   ![View All](images/ss4-1.png)
 
-3.2 Click on the **pbw-liberty-mariadb** project
+3.2 From the `Project` dropdown list, select **pbw-liberty-mariadb** project.
 
-3.3 Click on **Browse Catalog**
+   ![View All](images/ss4-2.png)
 
-3.4 Select the **Databases** category, click **MariaDB** and then **MariaDB (Ephemeral)**
+3.3 Click on **From Catalog** tile.
 
-   ![Create MariaDB](images/ss5.png)
+3.4 Under `All IItems`, select the **Databases** category, then choose **MariaDB**.
 
-3.5 Click **Next**
+3.5 Select **MariaDB (Ephemeral)** tile on the right.
 
-3.6 Enter the following values for the fields indicated below (leave remaining values at their default values)
+   ![Create MariaDB](images/ss5-1.png)
+
+3.6 Click **Instantiiate Template**.
+
+3.7 Enter the following values for the fields indicated below (leave remaining values at their default values)
 
 | Field name | Value |
 | ---------- | ----- |
@@ -91,23 +96,21 @@ In this lab you'll use these  capabilities can be used to deploy a small legacy 
 
 When you're done the dialog should look like the following:
 
- ![DB values](images/ss5.5.png)
+ ![DB values](images/ss5.5-1.png)
 
-3.7 Scroll down to the **Labels** section and change the **app** label value to `pbw-liberty-mariadb`
+3.8 Scroll down and click **Create**.
 
- ![App label](images/ss5.6.png)
+3.9 From the `Actions` dropdown mnenu, select the **Edit Labels**.
 
-3.8 Click **Next**
+ ![App label](images/ss5.6-1.png)
 
-3.9 Under **Create a binding for MariaDB (Ephemeral)** select **Create a secret in pbw-liberty-mariadb to be used later**
+3.10 Enter `app=pbw-liberty-mariadb` in field `Labels for TI mariadb-ephemeral-vbfhz`.
 
-3.10 Click **Create** and then click **Continue to the project overview**
+3.11 `Save`.
 
-   ![Continue](images/ss6.png)
+3.12 It may take couple of minutes for the new database instance to be ready. Verify the status of MariaDB instance before moving on to the next step.
 
-3.11 Verify that the Pod for the MariaDB deployment eventually shows as running
-
-   ![Pod running](images/ss7.png)
+   ![Pod running](images/ss7-1.png)
 
 ### Step 4: Clone the Github repo that contains the code for the Plants by WebSphere app
 
