@@ -41,9 +41,11 @@ In this lab you'll use these  capabilities can be used to deploy a small legacy 
    cd s2i-liberty-javaee7
    ```
 
-2.2 Get the hostname of your OpenShift internal registry so you can push images to it
+2.2 In order to deploy to OpenShift, you need to push container images to your cluster's internal registry. First, run the following commands to authenticate with your OpenShift image registry.
 
    ```bash
+   oc patch configs.imageregistry.operator.openshift.io/cluster --patch '{"spec":{"defaultRoute":true}}' --type=merge
+
    export INTERNAL_REG_HOST=$(oc get route default-route -n openshift-image-registry --template='{{ .spec.host }}')
    echo $INTERNAL_REG_HOST
    ```
@@ -167,7 +169,7 @@ When you're done the dialog should look like the following:
 
 5.8 Accept all the default values and click **Create**
 
-5.9 Wait until the instance of the Plants by WebSphere app on Liberty shows as `Running` status.
+5.9 Wait until the instance of the Plants by WebSphere app on Liberty shows as `Ready` status.
 
 5.9 Select `Topology` in the left pane.
 
@@ -179,7 +181,7 @@ When you're done the dialog should look like the following:
 
 5.12 Click the `Route` link to access the application.
 
-    >Note: The application may not be ready for you to access even deployment has been completed. It may take another couple of minutes when you are able to access it.
+> Note: The application may not be ready for you to access even deployment has been completed. It may take another couple of minutes when you are able to access it.
 
 
 ### Step 6: Test the Plants by WebSphere app
