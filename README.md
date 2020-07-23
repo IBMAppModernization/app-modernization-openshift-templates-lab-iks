@@ -1,8 +1,7 @@
 # IBM Client Developer Advocacy App Modernization Series
 
-## Lab - Migrating Legacy JEE apps to OpenShift on the IBM Cloud Kubernetes Service
+## Lab - Deploy "Plants by WebSphere Java application" to OpenShift
 
-### Working with S2I and Templates
 
 ## Overview
 
@@ -90,7 +89,7 @@ In this lab you'll use these  capabilities can be used to deploy a small legacy 
 
    ![Create MariaDB](images/ss5-1.png)
 
-3.6 Click **Instantiiate Template**.
+3.6 Click **Instantiate Template**.
 
 3.7 Enter the following values for the fields indicated below (leave remaining values at their default values)
 
