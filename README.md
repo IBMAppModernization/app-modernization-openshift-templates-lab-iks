@@ -2,6 +2,7 @@
 
 ## Lab - Deploy "Plants by WebSphere Java application" to OpenShift
 
+## Working with S2I and Templates
 
 ## Overview
 
