@@ -21,7 +21,7 @@ To login to IBM Cloud,
 
 1. Make sure that you are in the correct account#.
 
-    ![Account Number](../.gitbook/generic/account-number.png)
+    ![Account Number](images/account-number.png)
 
 >Note: you may not have access to your OpenShift cluster if you are not in the right account#.
 
@@ -31,11 +31,11 @@ Most of the labs will run CLI commands. The IBM Cloud Shell is preconfigured wit
 
 1. From the [IBM Cloud Home Page](https://cloud.ibm.com), select the terminal icon in the upper right hand menu.
 
-    ![Terminal Button](../.gitbook/generic/access-cloud-shell.png)
+    ![Terminal Button](images/access-cloud-shell.png)
 
 1. It might take a few moments to create the instance and a new session which automatically logs you in through the IBM Cloud CLI.
 
-    ![Cloud Shell](../.gitbook/images/grant-cluster/cloud-shell.png)
+    ![Cloud Shell](images/cloud-shell.png)
 
     > *Note: Ensure the cloud shell is using the same account where your cluster is provisioned. Check that the account name shown in the top right of the screen, next to `Current account` is the correct one.*
 
@@ -49,7 +49,7 @@ Most of the labs will run CLI commands. The IBM Cloud Shell is preconfigured wit
 
 1. Click on your username in the upper right and select `Copy Login Command` option.
 
-    ![Terminal Button](../.gitbook/generic/copy-openshift-cmd.png)
+    ![Terminal Button](images/copy-openshift-cmd.png)
 
 1. Click the `Display Token` link.
 
