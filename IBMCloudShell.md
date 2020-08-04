@@ -1,4 +1,4 @@
-# Pre-work
+# Access IBM Cloud via IBM Cloud Shell
 
 This section will guide you through the pre-requisites and setup of the environment used in this workshop labs. It is broken up into the following steps:
 

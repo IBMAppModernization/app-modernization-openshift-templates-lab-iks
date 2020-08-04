@@ -1,4 +1,4 @@
-# IBM Skills Network Access
+# Access IBM Cloud via IBM Skills Network
 
 ## 1. Access IBM Skills Network
 
