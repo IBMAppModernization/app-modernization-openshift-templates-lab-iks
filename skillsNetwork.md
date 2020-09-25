@@ -68,7 +68,17 @@
    ```
 
 
-## 3. Install s2i CLI tool
+## 3. Install vi Editor
+
+To install vi editor,
+
+	```
+	sudo apt-get update
+	sudo apt-get install vim
+	```
+
+
+## 4. Install s2i CLI tool
 
 To install s2i CLI tool,
 
