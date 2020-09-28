@@ -72,10 +72,10 @@
 
 To install vi editor,
 
-	```
-	sudo apt-get update
-	sudo apt-get install vim
-	```
+```
+sudo apt-get update
+sudo apt-get install vim
+```
 
 
 ## 4. Install s2i CLI tool
