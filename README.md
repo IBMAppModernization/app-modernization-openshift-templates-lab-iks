@@ -1,8 +1,8 @@
 # IBM Client Developer Advocacy App Modernization Series
 
-## Lab - Migrating Legacy JEE apps to OpenShift on the IBM Cloud Kubernetes Service
+## Lab - Deploy "Plants by WebSphere Java application" to OpenShift
 
-### Working with S2I and Templates
+## Working with S2I and Templates
 
 ## Overview
 
@@ -26,7 +26,11 @@ In this lab you'll use these  capabilities can be used to deploy a small legacy 
 
    ![Copy Login Command](images/ss3.png)
 
-1.5 Paste the login command in a terminal window and run it (Note: leave the web console browser tab open as you'll need it later on in the lab)
+1.5 Click `Display Token` link.
+
+1.6 Copy the login command in the `Log in with this token` field.
+
+1.7 Paste the login command in a terminal window and run it (Note: leave the web console browser tab open as you'll need it later on in the lab)
 
 ### Step 2: Clone the WebSphere Liberty S2I image source, create a Docker image,  and push it to the OpenShift internal registry
 
@@ -37,10 +41,13 @@ In this lab you'll use these  capabilities can be used to deploy a small legacy 
    cd s2i-liberty-javaee7
    ```
 
-2.2 Get the hostname of your OpenShift internal registry so you can push images to it
+2.2 In order to deploy to OpenShift, you need to push container images to your cluster's internal registry. First, run the following commands to authenticate with your OpenShift image registry.
 
    ```bash
-   export INTERNAL_REG_HOST=`oc get route docker-registry --template='{{ .spec.host }}' -n default`
+   oc patch configs.imageregistry.operator.openshift.io/cluster --patch '{"spec":{"defaultRoute":true}}' --type=merge
+
+   export INTERNAL_REG_HOST=$(oc get route default-route -n openshift-image-registry --template='{{ .spec.host }}')
+   echo $INTERNAL_REG_HOST
    ```
 2.3 Create a new OpenShift project for this lab
 
@@ -67,21 +74,25 @@ In this lab you'll use these  capabilities can be used to deploy a small legacy 
 
 ### Step 3: Install MariaDB from the OpenShift template catalog
 
-3.1 In your Web console browser tab under **My Projects** click on **View All**
+3.1 In your OpenShift Web console, switch to `Developer` view.
 
-   ![View All](images/ss4.png)
+   ![View All](images/ss4-1.png)
 
-3.2 Click on the **pbw-liberty-mariadb** project
+3.2 From the `Project` dropdown list, select **pbw-liberty-mariadb** project.
 
-3.3 Click on **Browse Catalog**
+   ![View All](images/ss4-2.png)
 
-3.4 Select the **Databases** category, click **MariaDB** and then **MariaDB (Ephemeral)**
+3.3 Click on **From Catalog** tile.
 
-   ![Create MariaDB](images/ss5.png)
+3.4 Under `All IItems`, select the **Databases** category, then choose **MariaDB**.
 
-3.5 Click **Next**
+3.5 Select **MariaDB (Ephemeral)** tile on the right.
 
-3.6 Enter the following values for the fields indicated below (leave remaining values at their default values)
+   ![Create MariaDB](images/ss5-1.png)
+
+3.6 Click **Instantiate Template**.
+
+3.7 Enter the following values for the fields indicated below (leave remaining values at their default values)
 
 | Field name | Value |
 | ---------- | ----- |
@@ -91,29 +102,27 @@ In this lab you'll use these  capabilities can be used to deploy a small legacy 
 
 When you're done the dialog should look like the following:
 
- ![DB values](images/ss5.5.png)
+ ![DB values](images/ss5.5-1.png)
 
-3.7 Scroll down to the **Labels** section and change the **app** label value to `pbw-liberty-mariadb`
+3.8 Scroll down and click **Create**.
 
- ![App label](images/ss5.6.png)
+3.9 From the `Actions` dropdown mnenu, select the **Edit Labels**.
 
-3.8 Click **Next**
+ ![App label](images/ss5.6-1.png)
 
-3.9 Under **Create a binding for MariaDB (Ephemeral)** select **Create a secret in pbw-liberty-mariadb to be used later**
+3.10 Enter `app=pbw-liberty-mariadb` in field `Labels for TI mariadb-ephemeral-vbfhz`.
 
-3.10 Click **Create** and then click **Continue to the project overview**
+3.11 `Save`.
 
-   ![Continue](images/ss6.png)
+3.12 It may take couple of minutes for the new database instance to be ready. Verify the status of MariaDB instance before moving on to the next step.
 
-3.11 Verify that the Pod for the MariaDB deployment eventually shows as running
-
-   ![Pod running](images/ss7.png)
+   ![Pod running](images/ss7-1.png)
 
 ### Step 4: Clone the Github repo that contains the code for the Plants by WebSphere app
 
 4.1  Login in [your Github account](https://github.com)
 
-4.2  In the search bar at the top left type in `app-modernization-plants-by-websphere-jee6`
+4.2  In the search bar at the top left, type in `app-modernization-plants-by-websphere-jee6`
 
  ![Search results](images/ss0.png)
 
@@ -137,24 +146,43 @@ When you're done the dialog should look like the following:
 
 ### Step 5: Install the Plants by WebSphere Liberty app using a template that utilizes S2I to build the app image   
 
-5.1 Add the Plants by WebSphere Liberty app template to your OpenShift cluster
+5.1 Add the Plants by WebSphere Liberty app template to your OpenShift cluster in the terminal window.
 
    ```bash
    oc create -f openshift/templates/s2i/pbw-liberty-template.yaml
    ```
-5.2 In your Web console browser tab make sure you're in the **pbw-liberty-mariadb** project (top left) and click on **Add to Project -> Browse Catalog** (top right)
+5.2 In your OpenShift coonsole, make sure you're in the **pbw-liberty-mariadb** project.
 
-   ![View All](images/ss8.png)
+   ![View All](images/ss8-1.png)
 
-5.3 Select the **Other** category and then click **Plants by WebSphere on Liberty**
+5.3 Select `Topology` in the left pane to view your MariaDB instance.
 
-5.4 Accept all the default values and click **Create**
+5.4 Select **+Add** in the left pane.
 
-5.5 Click  **Continue to the project overview**
+5.5 Select `From Catalog` tile.
 
-5.6 Wait until the Pod for the Plants by WebSphere app on Liberty shows as running and then click on the route to get to the app's endpoint
+5.6 Select the **Other** category under `All Items` and then select **Plants by WebSphere on Liberty**.
 
-   ![Launch app](images/ss9.png)
+   ![View All](images/ss8-2.png)
+
+5.7 Select `Instantiate Template`.
+
+5.8 Accept all the default values and click **Create**
+
+5.9 Wait until the instance of the Plants by WebSphere app on Liberty shows as `Ready` status.
+
+5.9 Select `Topology` in the left pane.
+
+5.10 Select `pbw-liberty-mariadb` icon in the right pane.
+
+   ![View All](images/ss8-3.png)
+
+5.11 It should be in `Running` status.
+
+5.12 Click the `Route` link to access the application.
+
+> Note: The application may not be ready for you to access even deployment has been completed. It may take another couple of minutes when you are able to access it.
+
 
 ### Step 6: Test the Plants by WebSphere app
 
